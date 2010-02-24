@@ -1,0 +1,22 @@
+= Usage
+
+Two steps. First set how many threads we want to use. Second use for or map method iterate an array.
+
+require 'parallel'
+
+Parallel.config(:thread => 3)		# there will create 3 threads when we iterate an array.
+Parallel.config(:thread => :core)	# how many threads will be created is dependents on cpu cores.
+
+Parallel.for(array) do |item|
+  # some expensive calculation
+end
+# Parallel.for will return an array that pass into it.
+You can also use each method.
+
+ret = Parallel.map([1, 2, 3]) do |item|
+  item + 1
+end
+# ret => [2, 3, 4]
+
+= Note
+Parallel for and map method is not thread safe. You should make sure each iteration will not change any global data, except you lock it first.
